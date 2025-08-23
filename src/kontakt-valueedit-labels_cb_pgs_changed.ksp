@@ -1,0 +1,6 @@
+on pgs_changed
+    USE_CODE_IF(__USE_ARP)
+        import "ARP/__ARP_08_pgs_changed_cb.ksp"
+    END_USE_CODE
+    
+end on

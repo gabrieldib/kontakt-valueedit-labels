@@ -1,0 +1,10 @@
+on ui_controls
+
+    { Example:
+        if in_range( NI_UI_ID, UIID_array [ 0 ], UIID_array [ max ])
+            uiid := NI_UI_ID - UIID_array [ 0 ]
+            // do something with the control that has uiid
+        end if
+    }
+
+end on

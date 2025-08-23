@@ -1,0 +1,114 @@
+{ DEFINES   _____________________________________________________________________________________ }
+    define __ADSR_ATTACK  := 0 
+    define __ADSR_DECAY   := 1
+    define __ADSR_SUSTAIN := 2 
+    define __ADSR_RELEASE := 3 
+
+    define __LABEL_TRANSFORM_EV_MS := 0
+    define __LABEL_TRANSFORM_EV_DB := 1
+
+    define __LABEL_VALUE_UNIT_MS := 0
+    define __LABEL_VALUE_UNIT_DB := 1
+    define __LABEL_VALUE_UNIT_ST := 2
+    define __LABEL_VALUE_UNIT_HZ := 3
+    define __LABEL_VALUE_UNIT_PC := 4
+
+{ CONSTANTS _____________________________________________________________________________________ }
+    declare const ~LOG2 := log(2.0)
+    declare const ~__ADSR_ATTACK_MAX  := 15000.0
+    declare const ~__ADSR_DECAY_MAX   := 25000.0
+    // declare const ~__ADSR_SUSTAIN_MAX := 12.0
+    declare const ~__ADSR_RELEASE_MAX := 25000.0
+
+    declare const ~__ADSR_ATTACK_VE_MULTI  := 1000000.0 / __ADSR_ATTACK_MAX
+    declare const ~__ADSR_DECAY_VE_MULTI   := 1000000.0 / __ADSR_DECAY_MAX
+    // declare const ~__ADSR_SUSTAIN_VE_MULTI := 1000000.0 / __ADSR_SUSTAIN_MAX
+    declare const ~__ADSR_RELEASE_VE_MULTI := 1000000.0 / __ADSR_RELEASE_MAX
+
+    declare !label_value_units [5]
+        label_value_units [__LABEL_VALUE_UNIT_MS] := "ms"
+        label_value_units [__LABEL_VALUE_UNIT_DB] := "dB"
+        label_value_units [__LABEL_VALUE_UNIT_ST] := "st"
+        label_value_units [__LABEL_VALUE_UNIT_HZ] := "hz"
+        label_value_units [__LABEL_VALUE_UNIT_PC] := "%"
+
+{ VARIABLES _____________________________________________________________________________________ }
+    { sketch ____________________________________________________________________________________ }
+        { integer }
+        declare a.i
+        declare b.i
+        declare c.i
+        declare d.i
+        declare e.i
+        declare f.i
+        declare g.i
+        declare h.i
+        declare i.i
+        declare j.i
+        declare k.i
+        declare l.i
+        declare m.i
+        declare n.i
+        declare o.i
+        declare p.i
+        declare q.i
+        declare r.i
+        declare s.i
+        declare t.i
+        declare u.i
+        declare v.i
+        declare w.i
+        declare x.i
+        declare y.i
+        declare z.i
+        { real }
+        declare ~a.r
+        declare ~b.r
+        declare ~c.r
+        declare ~d.r
+        declare ~e.r
+        declare ~f.r
+        declare ~g.r
+        declare ~h.r
+        declare ~i.r
+        declare ~j.r
+        declare ~k.r
+        declare ~l.r
+        declare ~m.r
+        declare ~n.r
+        declare ~o.r
+        declare ~p.r
+        declare ~q.r
+        declare ~r.r
+        declare ~s.r
+        declare ~t.r
+        declare ~u.r
+        declare ~v.r
+        declare ~w.r
+        declare ~x.r
+        declare ~y.r
+        declare ~z.r
+
+    { NCB _______________________________________________________________________________________ } 
+        declare note_held_count
+
+        declare read transf_ADSR_controls [ 4 ]
+
+        declare ~adsr_sustain_ev
+        declare ~adsr_sustain_dB
+
+{ CB SPECIFIC ___________________________________________________________________________________ }
+
+
+{ FUNCTIONS   ___________________________________________________________________________________ }
+    //fn001_set_ve_label
+    declare fn001.a.control_uiid
+    declare fn001.a.label_vu
+    declare fn001.a.label_vu_uiid // value unit
+    declare fn001.a.ve_uiid
+    declare fn001.r.ve_value
+    declare fn001.a.transform_type
+    declare ~fn001.a.ms_max
+    declare ~fn001.ev
+    declare ~fn001.db
+    declare ~fn001.ms_divider

@@ -1,0 +1,4 @@
+valueedit_attack   -> show_arrows := 0
+valueedit_decay    -> show_arrows := 0
+valueedit_sustain  -> show_arrows := 0
+valueedit_release  -> show_arrows := 0

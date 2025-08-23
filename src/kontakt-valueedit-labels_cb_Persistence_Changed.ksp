@@ -1,0 +1,10 @@
+on persistence_changed
+    message("PCCB")
+    import "kontakt-valueedit-labels_UIIDs_data.ksp"
+
+    
+    USE_CODE_IF(__USE_ARP)
+        import "ARP/__ARP_02_pc_cb.ksp"
+    END_USE_CODE
+    message("kontakt-valueedit-labels loaded successfully")
+end on

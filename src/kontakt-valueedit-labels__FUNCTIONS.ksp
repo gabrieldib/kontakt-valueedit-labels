@@ -1,0 +1,46 @@
+USE_CODE_IF(__USE_ARP)
+    import "ARP/__ARP_03_functions.ksp"
+END_USE_CODE
+
+function adsr_update_sustain_label
+{   this is one way
+    adsr_sustain_ev := real(slider_sustain) * 0.000001
+    adsr_sustain_ev := adsr_sustain_ev * adsr_sustain_ev * adsr_sustain_ev * 4.0
+    adsr_sustain_dB := 6.0 * log(adsr_sustain_ev) / LOG2
+    adsr_sustain_dB := round(adsr_sustain_dB * 100.0)/100.0
+    valueedit_sustain :=  int(adsr_sustain_dB)
+}
+{ this is another }
+    adsr_sustain_ev := real(slider_sustain)
+    adsr_sustain_dB := 18.0 * log2(adsr_sustain_ev/629960.524947)
+
+    valueedit_sustain :=  int(adsr_sustain_dB)
+
+end function
+
+function fn001_set_ve_label
+    {   arguments: 
+        fn001.a.control_uiid
+        fn001.a.label_vu      // constant: 0 = ms, 1 = dB, etc
+        fn001.a.label_vu_uiid
+        fn001.a.ve_uiid         // value editable label
+        fn001.a.transform_type  // what are we transforming from/to; also follows constants
+        fn001.a.ms_max
+    }
+    fn001.ev := real(fn001.a.control_uiid -> value)
+    select(fn001.a.transform_type)
+        case __LABEL_TRANSFORM_EV_MS
+            fn001.ms_divider := 1000000.0 / fn001.a.ms_max
+            fn001.r.ve_value := int(fn001.ev / fn001.ms_divider + 0.5 )
+
+        case __LABEL_TRANSFORM_EV_DB
+            fn001.db := 18.0 * log2(fn001.ev/629960.524947) { considering -inf : +12dB }
+            fn001.r.ve_value := int(fn001.db )
+            message(f'fn001.r.ve_value: <fn001.r.ve_value> | fn001.db: <fn001.db> | fn001.ev: <fn001.ev>')
+    end select
+
+    fn001.a.label_vu_uiid -> text  := label_value_units[fn001.a.label_vu]
+    fn001.a.ve_uiid       -> value := fn001.r.ve_value
+    message(f'fn001.a.ve_uiid: <fn001.a.ve_uiid> | get_ui_id(valueedit_sustain) : <get_ui_id(valueedit_sustain)>')
+    message(f'fn001.a.ve_uiid value: <fn001.a.ve_uiid -> value>')
+end function
