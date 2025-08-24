@@ -64,11 +64,6 @@
 
     define UIID_START := 32768
 
-    define __ADSR_ATTACK  := 0 
-    define __ADSR_DECAY   := 1
-    define __ADSR_SUSTAIN := 2 
-    define __ADSR_RELEASE := 3 
-
     define __LABEL_TRANSFORM_EV_MS := 0
     define __LABEL_TRANSFORM_EV_DB := 1
 
