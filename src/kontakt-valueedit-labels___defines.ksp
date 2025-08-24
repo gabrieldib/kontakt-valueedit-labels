@@ -5,17 +5,3 @@ define UI_ICON              := "icon"
 define LISTENER_BEAT        := 24
 define LISTENER_MS          := 1000
 define PLAY_NOTE_DUMMY      := 8
-
-define UI_SHOW := hide := HIDE_PART_NOTHING
-define UI_HIDE := hide := HIDE_WHOLE_CONTROL
-
-define int(#arg#)      := real_to_int(#arg#)
-define float(#arg#)    := int_to_real(#arg#)
-
-define __MIL  := 1000000
-
-define log.var(#object#) := message("#object# = " & #object#)
-define log.disp(#param#,#group#,#slot#,#bus#) := message("#param# value is " & get_engine_par_disp(#param#, #group#, #slot#, #bus#))
-
-//debug
-define bp(#arg#) := message("------ BREAK POINT " & #arg#  & " ------") 

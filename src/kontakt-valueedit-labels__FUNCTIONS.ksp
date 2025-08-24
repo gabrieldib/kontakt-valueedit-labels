@@ -1,7 +1,3 @@
-USE_CODE_IF(__USE_ARP)
-    import "ARP/__ARP_03_functions.ksp"
-END_USE_CODE
-
 function adsr_update_sustain_label
 {   this is one way
     adsr_sustain_ev := real(slider_sustain) * 0.000001

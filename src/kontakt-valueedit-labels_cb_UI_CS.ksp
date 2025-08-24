@@ -1,4 +1,5 @@
 on ui_controls
+    { sliders }
     if in_range( NI_UI_ID, UIID_ADSR_sliders [ 0 ], UIID_ADSR_sliders [ 3 ])
         uicbs_uiid_index     := NI_UI_ID - UIID_ADSR_sliders [ 0 ]
         uicbs_uiid_arr_index := _uicbs_uiid_arr_index(NI_UI_ID)

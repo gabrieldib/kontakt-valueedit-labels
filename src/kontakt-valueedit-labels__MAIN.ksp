@@ -1,9 +1,6 @@
 { #pragma save_compiled_source ../Resources/scripts/SLOT1_MAIN.txt}
 
-import "kontakt-valueedit-labels__SETUP.ksp"
 import "kontakt-valueedit-labels___defines.ksp"
-
-// SET_CONDITION(__USE_ARP) 
 
 on init
     message("")
@@ -14,34 +11,14 @@ on init
     set_listener            ($NI_SIGNAL_TIMER_BEAT, LISTENER_BEAT)
     set_listener            ($NI_SIGNAL_TIMER_MS,   LISTENER_MS)
 
-    USE_CODE_IF(__USE_ARP)
-        import "ARP/__ARP_01_init_cb_PRE_UI_figma.ksp"
-    END_USE_CODE
-
     import "kontakt-valueedit-labels_UI_figma.ksp"
     import "kontakt-valueedit-labels__DECLARATIONS.ksp"
     import "kontakt-valueedit-labels_UI_controls_settings.ksp"
     import "kontakt-valueedit-labels_UIIDs.ksp"
-    
-    USE_CODE_IF(__USE_ARP)
-        import "ARP/__ARP_01_init_cb_POST_UI_figma.ksp"
-        panel_ARP -> UI_HIDE
-    END_USE_CODE
-
 
 end on // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 import "kontakt-valueedit-labels__FUNCTIONS.ksp"
-import "kontakt-valueedit-labels_cb_Persistence_Changed.ksp"
-
-import "kontakt-valueedit-labels_cb_Async_Complete.ksp"
-import "kontakt-valueedit-labels_cb_Controller.ksp"
 
 import "kontakt-valueedit-labels_cb_UI_CS.ksp"
-import "kontakt-valueedit-labels_cb_UI_controls.ksp"
 
-import "kontakt-valueedit-labels_cb_Note.ksp"
-import "kontakt-valueedit-labels_cb_Release.ksp"
-import "kontakt-valueedit-labels_cb_Listener.ksp"
-import "kontakt-valueedit-labels_cb_Poly_AT.ksp"
-import "kontakt-valueedit-labels_cb_pgs_changed.ksp"

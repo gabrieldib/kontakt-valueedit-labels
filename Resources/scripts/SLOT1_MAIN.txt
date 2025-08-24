@@ -1,4 +1,4 @@
-{ Compiled on Sun Aug 24 01:22:02 2025 }
+{ Compiled on Sun Aug 24 01:54:42 2025 }
 on init
   declare $sksp_dummy
   declare $concat_it
@@ -319,10 +319,10 @@ function fn001_set_ve_label
   select ($fn001__a__transform_type)
     case 0
       ~fn001__ms_divider := 1000000.0/~fn001__a__ms_max
-      $fn001__r__ve_value := real_to_int(~fn001__a__control_curved_value/~fn001__ms_divider+0.5)
+      $fn001__r__ve_value := int(~fn001__a__control_curved_value/~fn001__ms_divider+0.5)
     case 1
       ~fn001__db := 18.0*log2(~fn001__ev/629960.524947)
-      $fn001__r__ve_value := real_to_int(~fn001__db)
+      $fn001__r__ve_value := int(~fn001__db)
   end select
   set_control_par_str($fn001__a__label_vu_uiid,$CONTROL_PAR_TEXT,!label_value_units[$fn001__a__label_vu])
   set_control_par($fn001__a__ve_uiid,$CONTROL_PAR_VALUE,$fn001__r__ve_value)
@@ -336,7 +336,7 @@ function fn003_get_inverse_curved_value_from_ve
   ~fn003__a__control_range := ~fn003__parent_range_max_value-~fn003__parent_range_min_value
   select ($fn003__a__curve_type)
     case 0
-      $fn003__r__ui_slider_value := real_to_int(~fn003__parent_range_min_value+(~fn003__a__control_range*pow((~fn003__control_value-~fn003__parent_range_min_value)/~fn003__a__control_range,1.0/~fn003__a__curve_exponent)))
+      $fn003__r__ui_slider_value := int(~fn003__parent_range_min_value+(~fn003__a__control_range*pow((~fn003__control_value-~fn003__parent_range_min_value)/~fn003__a__control_range,1.0/~fn003__a__curve_exponent)))
   end select
 end function
 
@@ -350,27 +350,6 @@ function fn002_get_curved_value
   end select
 end function
 
-on persistence_changed
-  message("PCCB")
-  %UIID_ADSR_sliders[0] := get_ui_id($slider_attack)
-  %UIID_ADSR_ves[0] := get_ui_id($valueedit_attack)
-  $i__i := 0
-  while ($i__i<=1000)
-    if ($i__i<4)
-      %UIID_ADSR_sliders[$i__i] := %UIID_ADSR_sliders[0]+$i__i
-      %UIID_ADSR_ves[$i__i] := %UIID_ADSR_ves[0]+$i__i
-    end if
-    inc($i__i)
-  end while
-  message("kontakt-valueedit-labels loaded successfully")
-end on
-
-on async_complete
-  if ($NI_ASYNC_ID=0)
-    message("If statements can't be empty, so I exist.")
-  end if
-end on
-
 on ui_controls
   if (in_range($NI_UI_ID,%UIID_ADSR_sliders[0],%UIID_ADSR_sliders[3]))
     $uicbs_uiid_index := $NI_UI_ID-%UIID_ADSR_sliders[0]
@@ -380,7 +359,7 @@ on ui_controls
       $fn002__a__curve_type := %slider_curve_type[$uicbs_uiid_arr_index]
       ~fn002__a__curve_exponent := ?slider_curve_exponent[$uicbs_uiid_arr_index]
       call fn002_get_curved_value
-      %control_curve_value[$uicbs_uiid_arr_index] := real_to_int(~fn002__r__curved_value)
+      %control_curve_value[$uicbs_uiid_arr_index] := int(~fn002__r__curved_value)
       set_control_par(%slider_child_ve_label_uiids[$uicbs_uiid_arr_index],$CONTROL_PAR_VALUE,%control_curve_value[$uicbs_uiid_arr_index]/%slider_to_ve_scaler[$uicbs_uiid_arr_index])
       $fn001__a__label_vu := 0
       $fn001__a__transform_type := 0
@@ -411,24 +390,12 @@ on ui_controls
       $fn002__a__curve_type := %slider_curve_type[$uicbs_parent_uiid_index]
       ~fn002__a__curve_exponent := ?slider_curve_exponent[$uicbs_parent_uiid_index]
       call fn002_get_curved_value
-      %control_curve_value[$uicbs_parent_uiid_index] := real_to_int(~fn002__r__curved_value)
+      %control_curve_value[$uicbs_parent_uiid_index] := int(~fn002__r__curved_value)
     else
       ~adsr_sustain_dB := real($valueedit_sustain)
       ~adsr_sustain_ev := 629960.524947*pow(2.0,~adsr_sustain_dB/18.0)
-      $slider_sustain := real_to_int(~adsr_sustain_ev)
+      $slider_sustain := int(~adsr_sustain_ev)
     end if
-  end if
-end on
-
-on note
-  ignore_event($EVENT_ID)
-  set_event_par($EVENT_ID,$EVENT_PAR_0,1)
-  inc($note_held_count)
-end on
-
-on release
-  if (get_event_par($EVENT_ID,$EVENT_PAR_0)=1)
-    dec($note_held_count)
   end if
 end on
 
