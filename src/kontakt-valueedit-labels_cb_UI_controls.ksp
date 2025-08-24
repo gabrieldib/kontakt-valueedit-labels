@@ -1,5 +1,0 @@
-USE_CODE_IF(__USE_ARP)
-    import "ARP/__ARP_04_ui_cb.ksp"
-END_USE_CODE
-
-
