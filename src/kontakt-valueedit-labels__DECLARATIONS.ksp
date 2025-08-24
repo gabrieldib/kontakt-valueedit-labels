@@ -1,68 +1,18 @@
-{ prototype ____________________________________________________________________________________ }
-        { integer }
-        declare a.i
-        declare b.i
-        declare c.i
-        declare d.i
-        declare e.i
-        declare f.i
-        declare g.i
-        declare h.i
-        declare i.i
-        declare j.i
-        declare k.i
-        declare l.i
-        declare m.i
-        declare n.i
-        declare o.i
-        declare p.i
-        declare q.i
-        declare r.i
-        declare s.i
-        declare t.i
-        declare u.i
-        declare v.i
-        declare w.i
-        declare x.i
-        declare y.i
-        declare z.i
-        { real }
-        declare ~a.r
-        declare ~b.r
-        declare ~c.r
-        declare ~d.r
-        declare ~e.r
-        declare ~f.r
-        declare ~g.r
-        declare ~h.r
-        declare ~i.r
-        declare ~j.r
-        declare ~k.r
-        declare ~l.r
-        declare ~m.r
-        declare ~n.r
-        declare ~o.r
-        declare ~p.r
-        declare ~q.r
-        declare ~r.r
-        declare ~s.r
-        declare ~t.r
-        declare ~u.r
-        declare ~v.r
-        declare ~w.r
-        declare ~x.r
-        declare ~y.r
-        declare ~z.r
-
+{{ KOVELB }}
 { DEFINES   _____________________________________________________________________________________ }
-    define _uiid_arr_index(#ui_control_uiid#) := get_ui_id(#ui_control_uiid#) - UIID_START
-    define _parent_slider_uiid_index(#ui_control#) := ve_labels_parent_sliders_uiid [ _uiid_arr_index(#ui_control#) ] - UIID_START
-    define _uicbs_uiid_arr_index(#ui_control_uiid#) := #ui_control_uiid# - UIID_START
-    define _uicbs_parent_slider_uiid_index(#ui_control_uiid#) := ve_labels_parent_sliders_uiid [ _uicbs_uiid_arr_index(#ui_control_uiid#) ] - UIID_START
+    define _uiid_arr_index(#ui_control_uiid#) := get_ui_id(#ui_control_uiid#) - __UIID_START
+    define _parent_slider_uiid_index(#ui_control#) := ve_labels_parent_sliders_uiid [ _uiid_arr_index(#ui_control#) ] - __UIID_START
+    define _uicbs_uiid_arr_index(#ui_control_uiid#) := #ui_control_uiid# - __UIID_START
+    define _uicbs_parent_slider_uiid_index(#ui_control_uiid#) := ve_labels_parent_sliders_uiid [ _uicbs_uiid_arr_index(#ui_control_uiid#) ] - __UIID_START
 
     define __TOTAL_SLIDERS := 4
 
-    define UIID_START := 32768
+    define __UIID_START := 32768
+
+    define __ADSR_ATTACK  := 0
+    define __ADSR_DECAY   := 1
+    define __ADSR_SUSTAIN := 2
+    define __ADSR_RELEASE := 3
 
     define __LABEL_TRANSFORM_EV_MS := 0
     define __LABEL_TRANSFORM_EV_DB := 1
@@ -89,9 +39,7 @@
         label_value_units [__LABEL_VALUE_UNIT_HZ] := "hz"
         label_value_units [__LABEL_VALUE_UNIT_PC] := "%"
 
-
-    { slider / ve specific _____________________________________________________________________ }
-
+{ VARIABLES _____________________________________________________________________________________ }
         {   I use this indexing system for ease of retrieval later, using the ve uiid directly,
             no need for constants, it remains flexible and forgetfulness proof
             to be accessed using uiid_arr_index() define
@@ -112,6 +60,8 @@
             ve_unit_labels_uiids [ _uiid_arr_index( valueedit_sustain ) ] := get_ui_id(label_sustain.unit)
             ve_unit_labels_uiids [ _uiid_arr_index( valueedit_release ) ] := get_ui_id(label_release.unit)
 
+        declare kovelb.counter
+
         declare slider_curve_type     [ 1000 ]
         declare ?slider_curve_exponent [ 1000 ]
         declare slider_child_ve_label_uiids   [ 1000 ] 
@@ -127,74 +77,60 @@
             _paired_s_ve_count := _valueedit_count
         end if
 
-        for i.i := 0 to _paired_s_ve_count
-            slider_curve_type           [ _slider_base_index + i.i ] := __CURVE_EXPONENTIAL
-            slider_curve_exponent       [ _slider_base_index + i.i ] := 5.0
-            slider_child_ve_label_uiids [ _slider_base_index + i.i ] := ...
-                UIID_START +_ve_label_base_index + i.i
 
-            ve_labels_parent_sliders_uiid [ _ve_label_base_index + i.i ] := ...
-                UIID_START +_slider_base_index + i.i
+        for kovelb.counter := 0 to _paired_s_ve_count
+            slider_curve_type           [ _slider_base_index + kovelb.counter ] := __CURVE_EXPONENTIAL
+            slider_curve_exponent       [ _slider_base_index + kovelb.counter ] := 5.0
+            slider_child_ve_label_uiids [ _slider_base_index + kovelb.counter ] := ...
+                __UIID_START +_ve_label_base_index + kovelb.counter
+
+            ve_labels_parent_sliders_uiid [ _ve_label_base_index + kovelb.counter ] := ...
+                __UIID_START +_slider_base_index + kovelb.counter
         end for
 
-
-
-{ VARIABLES _____________________________________________________________________________________ }
-
-    { NCB _______________________________________________________________________________________ } 
-        declare note_held_count
-
-    { General ___________________________________________________________________________________ } 
-        declare read transf_ADSR_controls [ 4 ]
         declare ~adsr_sustain_ev
         declare ~adsr_sustain_dB
 
-    { slider specific ___________________________________________________________________________ }
-        {   I use this indexing system for ease of retrieval later, using the slider uiid directly,
-        no need for constants, it remains flexible and forgetfulness proof
-        to be accessed using uiid_arr_index() define
-        }
         declare read control_curve_value   [ 1000 ]
 
-{ CB SPECIFIC ___________________________________________________________________________________ }
-    declare uicbs_uiid_index
-    declare uicbs_parent_uiid
-    declare uicbs_parent_uiid_index
-    declare uicbs_uiid_arr_index
+        declare uicbs_uiid_index
+        declare uicbs_parent_uiid
+        declare uicbs_parent_uiid_index
+        declare uicbs_uiid_arr_index
 
 { FUNCTIONS   ___________________________________________________________________________________ }
-    //fn001_set_ve_label
-    declare fn001.a.control_uiid
-    declare ~fn001.a.control_curved_value
-    declare fn001.a.label_vu
-    declare fn001.a.label_vu_uiid // value unit
-    declare fn001.a.ve_uiid
-    declare fn001.r.ve_value
-    declare fn001.a.transform_type
-    declare ~fn001.a.ms_max
-    declare ~fn001.ev
-    declare ~fn001.db
-    declare ~fn001.ms_divider
+    //fn_65e437_set_ve_label
+    declare fn_65e437.a.control_uiid
+    declare ~fn_65e437.a.control_curved_value
+    declare fn_65e437.a.label_vu
+    declare fn_65e437.a.label_vu_uiid // value unit
+    declare fn_65e437.a.ve_uiid
+    declare fn_65e437.r.ve_value
+    declare fn_65e437.a.transform_type
+    declare ~fn_65e437.a.ms_max
+    declare ~fn_65e437.ev
+    declare ~fn_65e437.db
+    declare ~fn_65e437.ms_divider
 
-    //fn002_get_curved_value
-    declare fn002.a.control_uiid
-    declare fn002.a.curve_type
-    declare ~fn002.a.curve_exponent
-    declare ~fn002.a.control_range
-    declare ~fn002.a.control_max
-    declare ~fn002.a.control_min
-    declare ~fn002.control_value
-    declare ~fn002.control_range_min
-    declare ~fn002.r.curved_value
+    //fn_aaac5c_get_curved_value
+    declare fn_aaac5c.a.control_uiid
+    declare fn_aaac5c.a.curve_type
+    declare ~fn_aaac5c.a.curve_exponent
+    declare ~fn_aaac5c.a.control_range
+    declare ~fn_aaac5c.a.control_max
+    declare ~fn_aaac5c.a.control_min
+    declare ~fn_aaac5c.control_value
+    declare ~fn_aaac5c.control_range_min
+    declare ~fn_aaac5c.r.curved_value
 
-    //fn003_get_curved_value_from_ve
-    declare fn003.a.ve_uiid
-    declare ~fn003.ve_value
-    declare ~fn003.a.ve_multiplicator
-    declare ~fn003.control_value
-    declare ~fn003.parent_range_min_value
-    declare ~fn003.parent_range_max_value
-    declare ~fn003.a.control_range
-    declare ~fn003.a.curve_exponent
-    declare fn003.a.curve_type
-    declare fn003.r.ui_slider_value
+    //fn_5762b1_get_inverse_curved_value_from_ve
+    declare fn_5762b1.a.ve_uiid
+    declare ~fn_5762b1.ve_value
+    declare ~fn_5762b1.a.ve_multiplicator
+    declare ~fn_5762b1.control_value
+    declare ~fn_5762b1.parent_range_min_value
+    declare ~fn_5762b1.parent_range_max_value
+    declare ~fn_5762b1.a.control_range
+    declare ~fn_5762b1.a.curve_exponent
+    declare fn_5762b1.a.curve_type
+    declare fn_5762b1.r.ui_slider_value

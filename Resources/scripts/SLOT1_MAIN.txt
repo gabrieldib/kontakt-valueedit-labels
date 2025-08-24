@@ -1,4 +1,4 @@
-{ Compiled on Sun Aug 24 02:02:15 2025 }
+{ Compiled on Sun Aug 24 13:14:01 2025 }
 on init
   declare $sksp_dummy
   declare $concat_it
@@ -263,10 +263,6 @@ on init
     %ve_labels_parent_sliders_uiid[$_ve_label_base_index+$i__i] := 32768+$_slider_base_index+$i__i
     inc($i__i)
   end while
-  declare $note_held_count
-  declare %transf_ADSR_controls[4]
-  make_persistent(%transf_ADSR_controls)
-  read_persistent_var(%transf_ADSR_controls)
   declare ~adsr_sustain_ev
   declare ~adsr_sustain_dB
   declare %control_curve_value[1000]
@@ -276,36 +272,36 @@ on init
   declare $uicbs_parent_uiid
   declare $uicbs_parent_uiid_index
   declare $uicbs_uiid_arr_index
-  declare $fn001__a__control_uiid
-  declare ~fn001__a__control_curved_value
-  declare $fn001__a__label_vu
-  declare $fn001__a__label_vu_uiid
-  declare $fn001__a__ve_uiid
-  declare $fn001__r__ve_value
-  declare $fn001__a__transform_type
-  declare ~fn001__a__ms_max
-  declare ~fn001__ev
-  declare ~fn001__db
-  declare ~fn001__ms_divider
-  declare $fn002__a__control_uiid
-  declare $fn002__a__curve_type
-  declare ~fn002__a__curve_exponent
-  declare ~fn002__a__control_range
-  declare ~fn002__a__control_max
-  declare ~fn002__a__control_min
-  declare ~fn002__control_value
-  declare ~fn002__control_range_min
-  declare ~fn002__r__curved_value
-  declare $fn003__a__ve_uiid
-  declare ~fn003__ve_value
-  declare ~fn003__a__ve_multiplicator
-  declare ~fn003__control_value
-  declare ~fn003__parent_range_min_value
-  declare ~fn003__parent_range_max_value
-  declare ~fn003__a__control_range
-  declare ~fn003__a__curve_exponent
-  declare $fn003__a__curve_type
-  declare $fn003__r__ui_slider_value
+  declare $fn_65e437__a__control_uiid
+  declare ~fn_65e437__a__control_curved_value
+  declare $fn_65e437__a__label_vu
+  declare $fn_65e437__a__label_vu_uiid
+  declare $fn_65e437__a__ve_uiid
+  declare $fn_65e437__r__ve_value
+  declare $fn_65e437__a__transform_type
+  declare ~fn_65e437__a__ms_max
+  declare ~fn_65e437__ev
+  declare ~fn_65e437__db
+  declare ~fn_65e437__ms_divider
+  declare $fn_aaac5c__a__control_uiid
+  declare $fn_aaac5c__a__curve_type
+  declare ~fn_aaac5c__a__curve_exponent
+  declare ~fn_aaac5c__a__control_range
+  declare ~fn_aaac5c__a__control_max
+  declare ~fn_aaac5c__a__control_min
+  declare ~fn_aaac5c__control_value
+  declare ~fn_aaac5c__control_range_min
+  declare ~fn_aaac5c__r__curved_value
+  declare $fn_5762b1__a__ve_uiid
+  declare ~fn_5762b1__ve_value
+  declare ~fn_5762b1__a__ve_multiplicator
+  declare ~fn_5762b1__control_value
+  declare ~fn_5762b1__parent_range_min_value
+  declare ~fn_5762b1__parent_range_max_value
+  declare ~fn_5762b1__a__control_range
+  declare ~fn_5762b1__a__curve_exponent
+  declare $fn_5762b1__a__curve_type
+  declare $fn_5762b1__r__ui_slider_value
   set_control_par(get_ui_id($valueedit_attack),$CONTROL_PAR_SHOW_ARROWS,0)
   set_control_par(get_ui_id($valueedit_decay),$CONTROL_PAR_SHOW_ARROWS,0)
   set_control_par(get_ui_id($valueedit_sustain),$CONTROL_PAR_SHOW_ARROWS,0)
@@ -314,39 +310,39 @@ on init
   declare %UIID_ADSR_ves[4]
 end on
 
-function fn001_set_ve_label
-  ~fn001__ev := real(get_control_par($fn001__a__control_uiid,$CONTROL_PAR_VALUE))
-  select ($fn001__a__transform_type)
+function fn_65e437_set_ve_label
+  ~fn_65e437__ev := real(get_control_par($fn_65e437__a__control_uiid,$CONTROL_PAR_VALUE))
+  select ($fn_65e437__a__transform_type)
     case 0
-      ~fn001__ms_divider := 1000000.0/~fn001__a__ms_max
-      $fn001__r__ve_value := int(~fn001__a__control_curved_value/~fn001__ms_divider+0.5)
+      ~fn_65e437__ms_divider := 1000000.0/~fn_65e437__a__ms_max
+      $fn_65e437__r__ve_value := int(~fn_65e437__a__control_curved_value/~fn_65e437__ms_divider+0.5)
     case 1
-      ~fn001__db := 18.0*log2(~fn001__ev/629960.524947)
-      $fn001__r__ve_value := int(~fn001__db)
+      ~fn_65e437__db := 18.0*log2(~fn_65e437__ev/629960.524947)
+      $fn_65e437__r__ve_value := int(~fn_65e437__db)
   end select
-  set_control_par_str($fn001__a__label_vu_uiid,$CONTROL_PAR_TEXT,!label_value_units[$fn001__a__label_vu])
-  set_control_par($fn001__a__ve_uiid,$CONTROL_PAR_VALUE,$fn001__r__ve_value)
+  set_control_par_str($fn_65e437__a__label_vu_uiid,$CONTROL_PAR_TEXT,!label_value_units[$fn_65e437__a__label_vu])
+  set_control_par($fn_65e437__a__ve_uiid,$CONTROL_PAR_VALUE,$fn_65e437__r__ve_value)
 end function
 
-function fn003_get_inverse_curved_value_from_ve
-  ~fn003__ve_value := real(get_control_par($fn003__a__ve_uiid,$CONTROL_PAR_VALUE))
-  ~fn003__control_value := ~fn003__ve_value*~fn003__a__ve_multiplicator
-  ~fn003__parent_range_min_value := real(get_control_par(%ve_labels_parent_sliders_uiid[$fn003__a__ve_uiid-32768],$CONTROL_PAR_MIN_VALUE))
-  ~fn003__parent_range_max_value := real(get_control_par(%ve_labels_parent_sliders_uiid[$fn003__a__ve_uiid-32768],$CONTROL_PAR_MAX_VALUE))
-  ~fn003__a__control_range := ~fn003__parent_range_max_value-~fn003__parent_range_min_value
-  select ($fn003__a__curve_type)
+function fn_5762b1_get_inverse_curved_value_from_ve
+  ~fn_5762b1__ve_value := real(get_control_par($fn_5762b1__a__ve_uiid,$CONTROL_PAR_VALUE))
+  ~fn_5762b1__control_value := ~fn_5762b1__ve_value*~fn_5762b1__a__ve_multiplicator
+  ~fn_5762b1__parent_range_min_value := real(get_control_par(%ve_labels_parent_sliders_uiid[$fn_5762b1__a__ve_uiid-32768],$CONTROL_PAR_MIN_VALUE))
+  ~fn_5762b1__parent_range_max_value := real(get_control_par(%ve_labels_parent_sliders_uiid[$fn_5762b1__a__ve_uiid-32768],$CONTROL_PAR_MAX_VALUE))
+  ~fn_5762b1__a__control_range := ~fn_5762b1__parent_range_max_value-~fn_5762b1__parent_range_min_value
+  select ($fn_5762b1__a__curve_type)
     case 0
-      $fn003__r__ui_slider_value := int(~fn003__parent_range_min_value+(~fn003__a__control_range*pow((~fn003__control_value-~fn003__parent_range_min_value)/~fn003__a__control_range,1.0/~fn003__a__curve_exponent)))
+      $fn_5762b1__r__ui_slider_value := int(~fn_5762b1__parent_range_min_value+(~fn_5762b1__a__control_range*pow((~fn_5762b1__control_value-~fn_5762b1__parent_range_min_value)/~fn_5762b1__a__control_range,1.0/~fn_5762b1__a__curve_exponent)))
   end select
 end function
 
-function fn002_get_curved_value
-  ~fn002__control_range_min := real(get_control_par($fn002__a__control_uiid,$CONTROL_PAR_MIN_VALUE))
-  ~fn002__a__control_range := real(get_control_par($fn002__a__control_uiid,$CONTROL_PAR_MAX_VALUE))-~fn002__control_range_min
-  ~fn002__control_value := real(get_control_par($fn002__a__control_uiid,$CONTROL_PAR_VALUE))
-  select ($fn002__a__curve_type)
+function fn_aaac5c_get_curved_value
+  ~fn_aaac5c__control_range_min := real(get_control_par($fn_aaac5c__a__control_uiid,$CONTROL_PAR_MIN_VALUE))
+  ~fn_aaac5c__a__control_range := real(get_control_par($fn_aaac5c__a__control_uiid,$CONTROL_PAR_MAX_VALUE))-~fn_aaac5c__control_range_min
+  ~fn_aaac5c__control_value := real(get_control_par($fn_aaac5c__a__control_uiid,$CONTROL_PAR_VALUE))
+  select ($fn_aaac5c__a__curve_type)
     case 0
-      ~fn002__r__curved_value := pow((~fn002__control_value-~fn002__control_range_min)/~fn002__a__control_range,~fn002__a__curve_exponent)*~fn002__a__control_range+~fn002__control_range_min
+      ~fn_aaac5c__r__curved_value := pow((~fn_aaac5c__control_value-~fn_aaac5c__control_range_min)/~fn_aaac5c__a__control_range,~fn_aaac5c__a__curve_exponent)*~fn_aaac5c__a__control_range+~fn_aaac5c__control_range_min
   end select
 end function
 
@@ -355,42 +351,42 @@ on ui_controls
     $uicbs_uiid_index := $NI_UI_ID-%UIID_ADSR_sliders[0]
     $uicbs_uiid_arr_index := $NI_UI_ID-32768
     if ($NI_UI_ID # %UIID_ADSR_sliders[2])
-      $fn002__a__control_uiid := $NI_UI_ID
-      $fn002__a__curve_type := %slider_curve_type[$uicbs_uiid_arr_index]
-      ~fn002__a__curve_exponent := ?slider_curve_exponent[$uicbs_uiid_arr_index]
-      call fn002_get_curved_value
-      %control_curve_value[$uicbs_uiid_arr_index] := int(~fn002__r__curved_value)
+      $fn_aaac5c__a__control_uiid := $NI_UI_ID
+      $fn_aaac5c__a__curve_type := %slider_curve_type[$uicbs_uiid_arr_index]
+      ~fn_aaac5c__a__curve_exponent := ?slider_curve_exponent[$uicbs_uiid_arr_index]
+      call fn_aaac5c_get_curved_value
+      %control_curve_value[$uicbs_uiid_arr_index] := int(~fn_aaac5c__r__curved_value)
       set_control_par(%slider_child_ve_label_uiids[$uicbs_uiid_arr_index],$CONTROL_PAR_VALUE,%control_curve_value[$uicbs_uiid_arr_index]/%slider_to_ve_scaler[$uicbs_uiid_arr_index])
-      $fn001__a__label_vu := 0
-      $fn001__a__transform_type := 0
-      ~fn001__ms_divider := real(%slider_to_ve_scaler[$uicbs_uiid_arr_index])
-      ~fn001__a__ms_max := real(%slider_to_label_ms_max[$uicbs_uiid_arr_index])
-      ~fn001__a__control_curved_value := ~fn002__r__curved_value
+      $fn_65e437__a__label_vu := 0
+      $fn_65e437__a__transform_type := 0
+      ~fn_65e437__ms_divider := real(%slider_to_ve_scaler[$uicbs_uiid_arr_index])
+      ~fn_65e437__a__ms_max := real(%slider_to_label_ms_max[$uicbs_uiid_arr_index])
+      ~fn_65e437__a__control_curved_value := ~fn_aaac5c__r__curved_value
     else
-      $fn001__a__label_vu := 1
-      $fn001__a__transform_type := 1
+      $fn_65e437__a__label_vu := 1
+      $fn_65e437__a__transform_type := 1
     end if
-    $fn001__a__label_vu_uiid := %ve_unit_labels_uiids[%slider_child_ve_label_uiids[$uicbs_uiid_arr_index]-32768]
-    $fn001__a__control_uiid := $NI_UI_ID
-    $fn001__a__ve_uiid := %slider_child_ve_label_uiids[$uicbs_uiid_arr_index]
-    call fn001_set_ve_label
+    $fn_65e437__a__label_vu_uiid := %ve_unit_labels_uiids[%slider_child_ve_label_uiids[$uicbs_uiid_arr_index]-32768]
+    $fn_65e437__a__control_uiid := $NI_UI_ID
+    $fn_65e437__a__ve_uiid := %slider_child_ve_label_uiids[$uicbs_uiid_arr_index]
+    call fn_65e437_set_ve_label
   end if
   if (in_range($NI_UI_ID,%UIID_ADSR_ves[0],%UIID_ADSR_ves[3]))
     $uicbs_uiid_index := $NI_UI_ID-%UIID_ADSR_ves[0]
     $uicbs_parent_uiid := %ve_labels_parent_sliders_uiid[$NI_UI_ID-32768]
     $uicbs_parent_uiid_index := %ve_labels_parent_sliders_uiid[$NI_UI_ID-32768]-32768
     if ($NI_UI_ID # %UIID_ADSR_ves[2])
-      $fn003__a__ve_uiid := $NI_UI_ID
-      ~fn003__a__ve_multiplicator := real(%slider_to_ve_scaler[$uicbs_parent_uiid_index])
-      $fn003__a__curve_type := %slider_curve_type[$uicbs_parent_uiid_index]
-      ~fn003__a__curve_exponent := ?slider_curve_exponent[$uicbs_parent_uiid_index]
-      call fn003_get_inverse_curved_value_from_ve
-      set_control_par($uicbs_parent_uiid,$CONTROL_PAR_VALUE,$fn003__r__ui_slider_value)
-      $fn002__a__control_uiid := $uicbs_parent_uiid
-      $fn002__a__curve_type := %slider_curve_type[$uicbs_parent_uiid_index]
-      ~fn002__a__curve_exponent := ?slider_curve_exponent[$uicbs_parent_uiid_index]
-      call fn002_get_curved_value
-      %control_curve_value[$uicbs_parent_uiid_index] := int(~fn002__r__curved_value)
+      $fn_5762b1__a__ve_uiid := $NI_UI_ID
+      ~fn_5762b1__a__ve_multiplicator := real(%slider_to_ve_scaler[$uicbs_parent_uiid_index])
+      $fn_5762b1__a__curve_type := %slider_curve_type[$uicbs_parent_uiid_index]
+      ~fn_5762b1__a__curve_exponent := ?slider_curve_exponent[$uicbs_parent_uiid_index]
+      call fn_5762b1_get_inverse_curved_value_from_ve
+      set_control_par($uicbs_parent_uiid,$CONTROL_PAR_VALUE,$fn_5762b1__r__ui_slider_value)
+      $fn_aaac5c__a__control_uiid := $uicbs_parent_uiid
+      $fn_aaac5c__a__curve_type := %slider_curve_type[$uicbs_parent_uiid_index]
+      ~fn_aaac5c__a__curve_exponent := ?slider_curve_exponent[$uicbs_parent_uiid_index]
+      call fn_aaac5c_get_curved_value
+      %control_curve_value[$uicbs_parent_uiid_index] := int(~fn_aaac5c__r__curved_value)
     else
       ~adsr_sustain_dB := real($valueedit_sustain)
       ~adsr_sustain_ev := 629960.524947*pow(2.0,~adsr_sustain_dB/18.0)
