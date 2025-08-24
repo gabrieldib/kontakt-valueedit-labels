@@ -1,4 +1,4 @@
-{ Compiled on Fri Aug 22 23:41:23 2025 }
+{ Compiled on Sun Aug 24 01:22:02 2025 }
 on init
   declare $sksp_dummy
   declare $concat_it
@@ -20,23 +20,23 @@ on init
   set_control_par_str($INST_WALLPAPER_ID,$CONTROL_PAR_PICTURE,"ui_background")
   declare $figma_counter
   declare $figma_counter_multi_line_labels
-  declare %UI_x[17] := (0, 336, 428, 520, 612, 325, 417, 509, 601, 372, 464, 556, 648, 330, 422, 514, 606)
-  declare %UI_y[17] := (0, 55, 55, 55, 55, 117, 117, 117, 117, 119, 119, 119, 119, 37, 37, 37, 37)
-  declare %UI_width[17] := (1000, 52, 52, 52, 52, 64, 64, 64, 64, 20, 20, 20, 20, 64, 64, 64, 64)
-  declare %UI_height[17] := (162, 52, 52, 52, 52, 18, 18, 18, 18, 14, 14, 14, 14, 18, 18, 18, 18)
-  declare %UI_skin[17] := (-1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-  declare %UI_font[17] := (-1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-  declare %UI_label_text[17] := (-1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 1, 0, 2, 3, 4, 5)
-  declare %UI_default_value[17] := (-1, 500000, 500000, 10000, 10000, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1)
-  declare %UI_text_alignment[17] := (-1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, 0, 1, 1, 1, 1)
-  declare %UI_text_y_pos[17] := (-1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, 0, 2, 2, 2, 2)
-  declare %UI_mouse_behaviour[17] := (-1, -500, -500, -500, -500, -500, -500, -500, -500, -1, -1, -1, -1, -1, -1, -1, -1)
+  declare %UI_x[17] := (0, 372, 464, 556, 648, 330, 422, 514, 606, 336, 428, 520, 612, 325, 417, 509, 601)
+  declare %UI_y[17] := (0, 119, 119, 119, 119, 37, 37, 37, 37, 55, 55, 55, 55, 117, 117, 117, 117)
+  declare %UI_width[17] := (1000, 20, 20, 20, 20, 64, 64, 64, 64, 52, 52, 52, 52, 64, 64, 64, 64)
+  declare %UI_height[17] := (162, 14, 14, 14, 14, 18, 18, 18, 18, 52, 52, 52, 52, 18, 18, 18, 18)
+  declare %UI_skin[17] := (-1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0)
+  declare %UI_font[17] := (-1, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, 0, 0, 0, 0)
+  declare %UI_label_text[17] := (-1, 0, 0, 1, 0, 2, 3, 4, 5, -1, -1, -1, -1, -1, -1, -1, -1)
+  declare %UI_default_value[17] := (-1, -1, -1, -1, -1, -1, -1, -1, -1, 500000, 500000, 10000, 10000, -1, -1, -1, -1)
+  declare %UI_text_alignment[17] := (-1, 0, 0, 0, 0, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1)
+  declare %UI_text_y_pos[17] := (-1, 0, 0, 0, 0, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1)
+  declare %UI_mouse_behaviour[17] := (-1, -1, -1, -1, -1, -1, -1, -1, -1, -500, -500, -500, -500, -500, -500, -500, -500)
   declare %UI_mouse_behaviour_x[17] := (-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1)
   declare %UI_mouse_behaviour_y[17] := (-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1)
-  declare %UI_z_layer[17] := (-1, 0, 0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1)
+  declare %UI_z_layer[17] := (-1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, 0, -1, -1, -1, -1)
   declare !skin_picture[2]
-  !skin_picture[0] := "slider_uni.64f.52px.#222222"
-  !skin_picture[1] := "label_transparent"
+  !skin_picture[0] := "label_transparent"
+  !skin_picture[1] := "slider_uni.64f.52px.#222222"
   declare !_labels_text[6*10]
   declare const $labels_text__SIZE_D1 := 6
   declare const $labels_text__SIZE_D2 := 10
@@ -50,30 +50,6 @@ on init
   declare %font_file_ids[1]
   %font_file_ids[0] := get_font_id("font_JuliaMono_Regular_12_#222222_op100_h1_v2")
   declare ui_panel $panel_UI
-  declare ui_slider $slider_attack(0,1000000)
-  make_persistent($slider_attack)
-  read_persistent_var($slider_attack)
-  declare ui_slider $slider_decay(0,1000000)
-  make_persistent($slider_decay)
-  read_persistent_var($slider_decay)
-  declare ui_slider $slider_sustain(12000,1000000)
-  make_persistent($slider_sustain)
-  read_persistent_var($slider_sustain)
-  declare ui_slider $slider_release(0,1000000)
-  make_persistent($slider_release)
-  read_persistent_var($slider_release)
-  declare ui_value_edit $valueedit_attack(0,15000,1)
-  make_persistent($valueedit_attack)
-  read_persistent_var($valueedit_attack)
-  declare ui_value_edit $valueedit_decay(0,25000,1)
-  make_persistent($valueedit_decay)
-  read_persistent_var($valueedit_decay)
-  declare ui_value_edit $valueedit_sustain(-346,12,1)
-  make_persistent($valueedit_sustain)
-  read_persistent_var($valueedit_sustain)
-  declare ui_value_edit $valueedit_release(0,25000,1)
-  make_persistent($valueedit_release)
-  read_persistent_var($valueedit_release)
   declare ui_label $label_attack__unit(1,1)
   make_persistent($label_attack__unit)
   read_persistent_var($label_attack__unit)
@@ -98,6 +74,30 @@ on init
   declare ui_label $label_release__title(1,1)
   make_persistent($label_release__title)
   read_persistent_var($label_release__title)
+  declare ui_slider $slider_attack(0,1000000)
+  make_persistent($slider_attack)
+  read_persistent_var($slider_attack)
+  declare ui_slider $slider_decay(0,1000000)
+  make_persistent($slider_decay)
+  read_persistent_var($slider_decay)
+  declare ui_slider $slider_sustain(13394,1000000)
+  make_persistent($slider_sustain)
+  read_persistent_var($slider_sustain)
+  declare ui_slider $slider_release(0,1000000)
+  make_persistent($slider_release)
+  read_persistent_var($slider_release)
+  declare ui_value_edit $valueedit_attack(0,15000,1)
+  make_persistent($valueedit_attack)
+  read_persistent_var($valueedit_attack)
+  declare ui_value_edit $valueedit_decay(0,25000,1)
+  make_persistent($valueedit_decay)
+  read_persistent_var($valueedit_decay)
+  declare ui_value_edit $valueedit_sustain(-346,12,1)
+  make_persistent($valueedit_sustain)
+  read_persistent_var($valueedit_sustain)
+  declare ui_value_edit $valueedit_release(0,25000,1)
+  make_persistent($valueedit_release)
+  read_persistent_var($valueedit_release)
   declare %UI_ID[10000] := (0)
   %UI_ID[0] := get_ui_id($panel_UI)
   $figma_counter := 1
@@ -158,19 +158,6 @@ on init
     set_control_par(%UI_ID[$figma_counter],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
     inc($figma_counter)
   end while
-  declare const ~LOG2 := log(2.0)
-  declare const ~__ADSR_ATTACK_MAX := 15000.0
-  declare const ~__ADSR_DECAY_MAX := 25000.0
-  declare const ~__ADSR_RELEASE_MAX := 25000.0
-  declare const ~__ADSR_ATTACK_VE_MULTI := 1000000.0/~__ADSR_ATTACK_MAX
-  declare const ~__ADSR_DECAY_VE_MULTI := 1000000.0/~__ADSR_DECAY_MAX
-  declare const ~__ADSR_RELEASE_VE_MULTI := 1000000.0/~__ADSR_RELEASE_MAX
-  declare !label_value_units[5]
-  !label_value_units[0] := "ms"
-  !label_value_units[1] := "dB"
-  !label_value_units[2] := "st"
-  !label_value_units[3] := "hz"
-  !label_value_units[4] := "%"
   declare $a__i
   declare $b__i
   declare $c__i
@@ -223,13 +210,74 @@ on init
   declare ~x__r
   declare ~y__r
   declare ~z__r
+  declare const ~LOG2 := log(2.0)
+  declare const $__ADSR_ATTACK_MAX := 15000
+  declare const $__ADSR_DECAY_MAX := 25000
+  declare const $__ADSR_SUSTAIN_MAX := 12
+  declare const $__ADSR_RELEASE_MAX := 25000
+  declare !label_value_units[5]
+  !label_value_units[0] := "ms"
+  !label_value_units[1] := "dB"
+  !label_value_units[2] := "st"
+  !label_value_units[3] := "hz"
+  !label_value_units[4] := "%"
+  declare %slider_to_label_ms_max[1000]
+  %slider_to_label_ms_max[get_ui_id($slider_attack)-32768] := 15000
+  %slider_to_label_ms_max[get_ui_id($slider_decay)-32768] := 25000
+  %slider_to_label_ms_max[get_ui_id($slider_release)-32768] := 25000
+  declare %slider_to_ve_scaler[1000]
+  %slider_to_ve_scaler[get_ui_id($slider_attack)-32768] := 1000000/$__ADSR_ATTACK_MAX
+  %slider_to_ve_scaler[get_ui_id($slider_decay)-32768] := 1000000/$__ADSR_DECAY_MAX
+  %slider_to_ve_scaler[get_ui_id($slider_release)-32768] := 1000000/$__ADSR_RELEASE_MAX
+  declare %ve_unit_labels_uiids[1000]
+  %ve_unit_labels_uiids[get_ui_id($valueedit_attack)-32768] := get_ui_id($label_attack__unit)
+  %ve_unit_labels_uiids[get_ui_id($valueedit_decay)-32768] := get_ui_id($label_decay__unit)
+  %ve_unit_labels_uiids[get_ui_id($valueedit_sustain)-32768] := get_ui_id($label_sustain__unit)
+  %ve_unit_labels_uiids[get_ui_id($valueedit_release)-32768] := get_ui_id($label_release__unit)
+  declare %slider_curve_type[1000]
+  declare ?slider_curve_exponent[1000]
+  declare %slider_child_ve_label_uiids[1000]
+  declare %ve_labels_parent_sliders_uiid[1000]
+  declare $_slider_base_index
+  $_slider_base_index := get_ui_id($slider_attack)-32768
+  declare $_slider_last_index
+  $_slider_last_index := get_ui_id($slider_release)-32768
+  declare $_ve_label_base_index
+  $_ve_label_base_index := get_ui_id($valueedit_attack)-32768
+  declare $_ve_label_last_index
+  $_ve_label_last_index := get_ui_id($valueedit_release)-32768
+  declare $_sliders_count
+  $_sliders_count := $_slider_last_index-$_slider_base_index+1
+  declare $_valueedit_count
+  $_valueedit_count := $_ve_label_last_index-$_ve_label_base_index+1
+  declare $_paired_s_ve_count
+  $_paired_s_ve_count := $_sliders_count
+  if ($_valueedit_count<$_sliders_count)
+    $_paired_s_ve_count := $_valueedit_count
+  end if
+  $i__i := 0
+  while ($i__i<=$_paired_s_ve_count)
+    %slider_curve_type[$_slider_base_index+$i__i] := 0
+    ?slider_curve_exponent[$_slider_base_index+$i__i] := 5.0
+    %slider_child_ve_label_uiids[$_slider_base_index+$i__i] := 32768+$_ve_label_base_index+$i__i
+    %ve_labels_parent_sliders_uiid[$_ve_label_base_index+$i__i] := 32768+$_slider_base_index+$i__i
+    inc($i__i)
+  end while
   declare $note_held_count
   declare %transf_ADSR_controls[4]
   make_persistent(%transf_ADSR_controls)
   read_persistent_var(%transf_ADSR_controls)
   declare ~adsr_sustain_ev
   declare ~adsr_sustain_dB
+  declare %control_curve_value[1000]
+  make_persistent(%control_curve_value)
+  read_persistent_var(%control_curve_value)
+  declare $uicbs_uiid_index
+  declare $uicbs_parent_uiid
+  declare $uicbs_parent_uiid_index
+  declare $uicbs_uiid_arr_index
   declare $fn001__a__control_uiid
+  declare ~fn001__a__control_curved_value
   declare $fn001__a__label_vu
   declare $fn001__a__label_vu_uiid
   declare $fn001__a__ve_uiid
@@ -239,10 +287,31 @@ on init
   declare ~fn001__ev
   declare ~fn001__db
   declare ~fn001__ms_divider
+  declare $fn002__a__control_uiid
+  declare $fn002__a__curve_type
+  declare ~fn002__a__curve_exponent
+  declare ~fn002__a__control_range
+  declare ~fn002__a__control_max
+  declare ~fn002__a__control_min
+  declare ~fn002__control_value
+  declare ~fn002__control_range_min
+  declare ~fn002__r__curved_value
+  declare $fn003__a__ve_uiid
+  declare ~fn003__ve_value
+  declare ~fn003__a__ve_multiplicator
+  declare ~fn003__control_value
+  declare ~fn003__parent_range_min_value
+  declare ~fn003__parent_range_max_value
+  declare ~fn003__a__control_range
+  declare ~fn003__a__curve_exponent
+  declare $fn003__a__curve_type
+  declare $fn003__r__ui_slider_value
   set_control_par(get_ui_id($valueedit_attack),$CONTROL_PAR_SHOW_ARROWS,0)
   set_control_par(get_ui_id($valueedit_decay),$CONTROL_PAR_SHOW_ARROWS,0)
   set_control_par(get_ui_id($valueedit_sustain),$CONTROL_PAR_SHOW_ARROWS,0)
   set_control_par(get_ui_id($valueedit_release),$CONTROL_PAR_SHOW_ARROWS,0)
+  declare %UIID_ADSR_sliders[4]
+  declare %UIID_ADSR_ves[4]
 end on
 
 function fn001_set_ve_label
@@ -250,20 +319,49 @@ function fn001_set_ve_label
   select ($fn001__a__transform_type)
     case 0
       ~fn001__ms_divider := 1000000.0/~fn001__a__ms_max
-      $fn001__r__ve_value := real_to_int(~fn001__ev/~fn001__ms_divider+0.5)
+      $fn001__r__ve_value := real_to_int(~fn001__a__control_curved_value/~fn001__ms_divider+0.5)
     case 1
       ~fn001__db := 18.0*log2(~fn001__ev/629960.524947)
       $fn001__r__ve_value := real_to_int(~fn001__db)
-      message("fn001.r.ve_value: " & $fn001__r__ve_value & " | fn001.db: " & ~fn001__db & " | fn001.ev: " & ~fn001__ev & "")
   end select
   set_control_par_str($fn001__a__label_vu_uiid,$CONTROL_PAR_TEXT,!label_value_units[$fn001__a__label_vu])
   set_control_par($fn001__a__ve_uiid,$CONTROL_PAR_VALUE,$fn001__r__ve_value)
-  message("fn001.a.ve_uiid: " & $fn001__a__ve_uiid & " | get_ui_id(valueedit_sustain) : " & get_ui_id($valueedit_sustain) & "")
-  message("fn001.a.ve_uiid value: " & get_control_par($fn001__a__ve_uiid,$CONTROL_PAR_VALUE) & "")
+end function
+
+function fn003_get_inverse_curved_value_from_ve
+  ~fn003__ve_value := real(get_control_par($fn003__a__ve_uiid,$CONTROL_PAR_VALUE))
+  ~fn003__control_value := ~fn003__ve_value*~fn003__a__ve_multiplicator
+  ~fn003__parent_range_min_value := real(get_control_par(%ve_labels_parent_sliders_uiid[$fn003__a__ve_uiid-32768],$CONTROL_PAR_MIN_VALUE))
+  ~fn003__parent_range_max_value := real(get_control_par(%ve_labels_parent_sliders_uiid[$fn003__a__ve_uiid-32768],$CONTROL_PAR_MAX_VALUE))
+  ~fn003__a__control_range := ~fn003__parent_range_max_value-~fn003__parent_range_min_value
+  select ($fn003__a__curve_type)
+    case 0
+      $fn003__r__ui_slider_value := real_to_int(~fn003__parent_range_min_value+(~fn003__a__control_range*pow((~fn003__control_value-~fn003__parent_range_min_value)/~fn003__a__control_range,1.0/~fn003__a__curve_exponent)))
+  end select
+end function
+
+function fn002_get_curved_value
+  ~fn002__control_range_min := real(get_control_par($fn002__a__control_uiid,$CONTROL_PAR_MIN_VALUE))
+  ~fn002__a__control_range := real(get_control_par($fn002__a__control_uiid,$CONTROL_PAR_MAX_VALUE))-~fn002__control_range_min
+  ~fn002__control_value := real(get_control_par($fn002__a__control_uiid,$CONTROL_PAR_VALUE))
+  select ($fn002__a__curve_type)
+    case 0
+      ~fn002__r__curved_value := pow((~fn002__control_value-~fn002__control_range_min)/~fn002__a__control_range,~fn002__a__curve_exponent)*~fn002__a__control_range+~fn002__control_range_min
+  end select
 end function
 
 on persistence_changed
   message("PCCB")
+  %UIID_ADSR_sliders[0] := get_ui_id($slider_attack)
+  %UIID_ADSR_ves[0] := get_ui_id($valueedit_attack)
+  $i__i := 0
+  while ($i__i<=1000)
+    if ($i__i<4)
+      %UIID_ADSR_sliders[$i__i] := %UIID_ADSR_sliders[0]+$i__i
+      %UIID_ADSR_ves[$i__i] := %UIID_ADSR_ves[0]+$i__i
+    end if
+    inc($i__i)
+  end while
   message("kontakt-valueedit-labels loaded successfully")
 end on
 
@@ -273,49 +371,53 @@ on async_complete
   end if
 end on
 
-on ui_control($slider_attack)
-  $fn001__a__control_uiid := get_ui_id($slider_attack)
-  $fn001__a__label_vu := 0
-  $fn001__a__label_vu_uiid := get_ui_id($label_attack__unit)
-  $fn001__a__ve_uiid := get_ui_id($valueedit_attack)
-  $fn001__a__transform_type := 0
-  ~fn001__a__ms_max := 15000.0
-  call fn001_set_ve_label
-end on
-
-on ui_control($slider_decay)
-  $valueedit_decay := $slider_decay/40
-end on
-
-on ui_control($slider_sustain)
-  $fn001__a__control_uiid := get_ui_id($slider_sustain)
-  $fn001__a__label_vu := 1
-  $fn001__a__label_vu_uiid := get_ui_id($label_sustain__unit)
-  $fn001__a__ve_uiid := get_ui_id($valueedit_sustain)
-  $fn001__a__transform_type := 1
-  call fn001_set_ve_label
-end on
-
-on ui_control($slider_release)
-  $valueedit_release := $slider_release/40
-end on
-
-on ui_control($valueedit_attack)
-  $slider_attack := real_to_int(real($valueedit_attack)*~__ADSR_ATTACK_VE_MULTI)
-end on
-
-on ui_control($valueedit_decay)
-  $slider_decay := real_to_int(real($valueedit_decay)*~__ADSR_DECAY_VE_MULTI)
-end on
-
-on ui_control($valueedit_sustain)
-  ~adsr_sustain_dB := real($valueedit_sustain)
-  ~adsr_sustain_ev := 629960.524947*pow(2.0,~adsr_sustain_dB/18.0)
-  $slider_sustain := real_to_int(~adsr_sustain_ev)
-end on
-
-on ui_control($valueedit_release)
-  $slider_release := real_to_int(real($valueedit_release)*~__ADSR_RELEASE_VE_MULTI)
+on ui_controls
+  if (in_range($NI_UI_ID,%UIID_ADSR_sliders[0],%UIID_ADSR_sliders[3]))
+    $uicbs_uiid_index := $NI_UI_ID-%UIID_ADSR_sliders[0]
+    $uicbs_uiid_arr_index := $NI_UI_ID-32768
+    if ($NI_UI_ID # %UIID_ADSR_sliders[2])
+      $fn002__a__control_uiid := $NI_UI_ID
+      $fn002__a__curve_type := %slider_curve_type[$uicbs_uiid_arr_index]
+      ~fn002__a__curve_exponent := ?slider_curve_exponent[$uicbs_uiid_arr_index]
+      call fn002_get_curved_value
+      %control_curve_value[$uicbs_uiid_arr_index] := real_to_int(~fn002__r__curved_value)
+      set_control_par(%slider_child_ve_label_uiids[$uicbs_uiid_arr_index],$CONTROL_PAR_VALUE,%control_curve_value[$uicbs_uiid_arr_index]/%slider_to_ve_scaler[$uicbs_uiid_arr_index])
+      $fn001__a__label_vu := 0
+      $fn001__a__transform_type := 0
+      ~fn001__ms_divider := real(%slider_to_ve_scaler[$uicbs_uiid_arr_index])
+      ~fn001__a__ms_max := real(%slider_to_label_ms_max[$uicbs_uiid_arr_index])
+      ~fn001__a__control_curved_value := ~fn002__r__curved_value
+    else
+      $fn001__a__label_vu := 1
+      $fn001__a__transform_type := 1
+    end if
+    $fn001__a__label_vu_uiid := %ve_unit_labels_uiids[%slider_child_ve_label_uiids[$uicbs_uiid_arr_index]-32768]
+    $fn001__a__control_uiid := $NI_UI_ID
+    $fn001__a__ve_uiid := %slider_child_ve_label_uiids[$uicbs_uiid_arr_index]
+    call fn001_set_ve_label
+  end if
+  if (in_range($NI_UI_ID,%UIID_ADSR_ves[0],%UIID_ADSR_ves[3]))
+    $uicbs_uiid_index := $NI_UI_ID-%UIID_ADSR_ves[0]
+    $uicbs_parent_uiid := %ve_labels_parent_sliders_uiid[$NI_UI_ID-32768]
+    $uicbs_parent_uiid_index := %ve_labels_parent_sliders_uiid[$NI_UI_ID-32768]-32768
+    if ($NI_UI_ID # %UIID_ADSR_ves[2])
+      $fn003__a__ve_uiid := $NI_UI_ID
+      ~fn003__a__ve_multiplicator := real(%slider_to_ve_scaler[$uicbs_parent_uiid_index])
+      $fn003__a__curve_type := %slider_curve_type[$uicbs_parent_uiid_index]
+      ~fn003__a__curve_exponent := ?slider_curve_exponent[$uicbs_parent_uiid_index]
+      call fn003_get_inverse_curved_value_from_ve
+      set_control_par($uicbs_parent_uiid,$CONTROL_PAR_VALUE,$fn003__r__ui_slider_value)
+      $fn002__a__control_uiid := $uicbs_parent_uiid
+      $fn002__a__curve_type := %slider_curve_type[$uicbs_parent_uiid_index]
+      ~fn002__a__curve_exponent := ?slider_curve_exponent[$uicbs_parent_uiid_index]
+      call fn002_get_curved_value
+      %control_curve_value[$uicbs_parent_uiid_index] := real_to_int(~fn002__r__curved_value)
+    else
+      ~adsr_sustain_dB := real($valueedit_sustain)
+      ~adsr_sustain_ev := 629960.524947*pow(2.0,~adsr_sustain_dB/18.0)
+      $slider_sustain := real_to_int(~adsr_sustain_ev)
+    end if
+  end if
 end on
 
 on note

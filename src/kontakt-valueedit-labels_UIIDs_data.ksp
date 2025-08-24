@@ -1,0 +1,9 @@
+UIID_ADSR_sliders [ 0 ] := get_ui_id(slider_attack)
+UIID_ADSR_ves     [ 0 ] := get_ui_id(valueedit_attack)
+
+for i.i := 0 to 1000
+    if i.i < 4
+        UIID_ADSR_sliders [ i.i ] := UIID_ADSR_sliders [ 0 ] + i.i
+        UIID_ADSR_ves     [ i.i ] := UIID_ADSR_ves     [ 0 ] + i.i
+    end if
+end for

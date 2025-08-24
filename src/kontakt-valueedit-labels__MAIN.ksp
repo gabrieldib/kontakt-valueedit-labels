@@ -3,7 +3,7 @@
 import "kontakt-valueedit-labels__SETUP.ksp"
 import "kontakt-valueedit-labels___defines.ksp"
 
-// SET_CONDITION(__USE_ARP)
+// SET_CONDITION(__USE_ARP) 
 
 on init
     message("")

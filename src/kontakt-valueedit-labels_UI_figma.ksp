@@ -1,8 +1,8 @@
 
 {  
-  Figma to Kontakt UI code generated at 2025/8/22 22:54,
-  run #38 on document "Freya" on page "UI EXPORT valueedit as label" 
-  v0.60 2025-08-22
+  Figma to Kontakt UI code generated at 2025/8/23 23:48,
+  run #42 on document "Freya" on page "UI EXPORT valueedit as label" 
+  v0.60 2025-08-23
 }
 
   make_perfview
@@ -13,25 +13,25 @@
   declare $figma_counter
   declare $figma_counter_multi_line_labels
 
-  declare %UI_x                 [17] := (0,336,428,520,612,325,417,509,601,372,464,556,648,330,422,514,606)
-  declare %UI_y                 [17] := (0,55,55,55,55,117,117,117,117,119,119,119,119,37,37,37,37)
-  declare %UI_width             [17] := (1000,52,52,52,52,64,64,64,64,20,20,20,20,64,64,64,64)
-  declare %UI_height            [17] := (162,52,52,52,52,18,18,18,18,14,14,14,14,18,18,18,18)
-  declare %UI_skin              [17] := (-1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1)
-  declare %UI_font              [17] := (-1,-1,-1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0)
-  declare %UI_label_text        [17] := (-1,-1,-1,-1,-1,-1,-1,-1,-1,0,0,1,0,2,3,4,5)
-  declare %UI_default_value     [17] := (-1,500000,500000,10000,10000,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1)
-  declare %UI_text_alignment    [17] := (-1,-1,-1,-1,-1,-1,-1,-1,-1,0,0,0,0,1,1,1,1)
-  declare %UI_text_y_pos        [17] := (-1,-1,-1,-1,-1,-1,-1,-1,-1,0,0,0,0,2,2,2,2)
-  declare %UI_mouse_behaviour   [17] := (-1,-500,-500,-500,-500,-500,-500,-500,-500,-1,-1,-1,-1,-1,-1,-1,-1)
+  declare %UI_x                 [17] := (0,372,464,556,648,330,422,514,606,336,428,520,612,325,417,509,601)
+  declare %UI_y                 [17] := (0,119,119,119,119,37,37,37,37,55,55,55,55,117,117,117,117)
+  declare %UI_width             [17] := (1000,20,20,20,20,64,64,64,64,52,52,52,52,64,64,64,64)
+  declare %UI_height            [17] := (162,14,14,14,14,18,18,18,18,52,52,52,52,18,18,18,18)
+  declare %UI_skin              [17] := (-1,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0)
+  declare %UI_font              [17] := (-1,0,0,0,0,0,0,0,0,-1,-1,-1,-1,0,0,0,0)
+  declare %UI_label_text        [17] := (-1,0,0,1,0,2,3,4,5,-1,-1,-1,-1,-1,-1,-1,-1)
+  declare %UI_default_value     [17] := (-1,-1,-1,-1,-1,-1,-1,-1,-1,500000,500000,10000,10000,-1,-1,-1,-1)
+  declare %UI_text_alignment    [17] := (-1,0,0,0,0,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1)
+  declare %UI_text_y_pos        [17] := (-1,0,0,0,0,2,2,2,2,-1,-1,-1,-1,-1,-1,-1,-1)
+  declare %UI_mouse_behaviour   [17] := (-1,-1,-1,-1,-1,-1,-1,-1,-1,-500,-500,-500,-500,-500,-500,-500,-500)
   declare %UI_mouse_behaviour_x [17] := (-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1)
   declare %UI_mouse_behaviour_y [17] := (-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1)
-  declare %UI_z_layer           [17] := (-1,0,0,0,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1)
+  declare %UI_z_layer           [17] := (-1,-1,-1,-1,-1,-1,-1,-1,-1,0,0,0,0,-1,-1,-1,-1)
 
   SET_CONDITION(SKIN_PICTURE_SETTINGS)
   declare !skin_picture[2]
-    !skin_picture[0] := "slider_uni.64f.52px.#222222"
-    !skin_picture[1] := "label_transparent"
+    !skin_picture[0] := "label_transparent"
+    !skin_picture[1] := "slider_uni.64f.52px.#222222"
 
   SET_CONDITION(LABELS_TEXT_SETTINGS)
   declare !labels_text[6 , 10]
@@ -49,14 +49,6 @@
     %font_file_ids[0] := get_font_id("font_JuliaMono_Regular_12_#222222_op100_h1_v2")
 
   declare  ui_panel                     $panel_UI                                
-  declare read ui_slider                $slider_attack                            ( 0, 1000000 ) 
-  declare read ui_slider                $slider_decay                             ( 0, 1000000 ) 
-  declare read ui_slider                $slider_sustain                           ( 12000, 1000000 ) 
-  declare read ui_slider                $slider_release                           ( 0, 1000000 ) 
-  declare read ui_value_edit            $valueedit_attack                         ( 0, 15000, 1 ) 
-  declare read ui_value_edit            $valueedit_decay                          ( 0, 25000, 1 ) 
-  declare read ui_value_edit            $valueedit_sustain                        ( -346, 12, 1 ) 
-  declare read ui_value_edit            $valueedit_release                        ( 0, 25000, 1 ) 
   declare read ui_label                 $label_attack.unit                       ( 1, 1 )
   declare read ui_label                 $label_decay.unit                        ( 1, 1 )
   declare read ui_label                 $label_sustain.unit                      ( 1, 1 )
@@ -65,6 +57,14 @@
   declare read ui_label                 $label_decay.title                       ( 1, 1 )
   declare read ui_label                 $label_sustain.title                     ( 1, 1 )
   declare read ui_label                 $label_release.title                     ( 1, 1 )
+  declare read ui_slider                $slider_attack                            ( 0, 1000000 ) 
+  declare read ui_slider                $slider_decay                             ( 0, 1000000 ) 
+  declare read ui_slider                $slider_sustain                           ( 13394, 1000000 ) 
+  declare read ui_slider                $slider_release                           ( 0, 1000000 ) 
+  declare read ui_value_edit            $valueedit_attack                         ( 0, 15000, 1 ) 
+  declare read ui_value_edit            $valueedit_decay                          ( 0, 25000, 1 ) 
+  declare read ui_value_edit            $valueedit_sustain                        ( -346, 12, 1 ) 
+  declare read ui_value_edit            $valueedit_release                        ( 0, 25000, 1 ) 
 
   { capturing all ui_controls uiids }
   declare %UI_ID           [10000] := (0)
@@ -149,6 +149,6 @@
   end while  
 
 {  
-  Figma to Kontakt UI code generated at 2025/8/22 22:54,
-  run #41 on document "Freya" on page "UI EXPORT valueedit as label"  
+  Figma to Kontakt UI code generated at 2025/8/23 23:48,
+  run #45 on document "Freya" on page "UI EXPORT valueedit as label"  
 }

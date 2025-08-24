@@ -21,26 +21,82 @@ end function
 function fn001_set_ve_label
     {   arguments: 
         fn001.a.control_uiid
-        fn001.a.label_vu      // constant: 0 = ms, 1 = dB, etc
+        fn001.a.label_vu         // constant: 0 = ms, 1 = dB, etc
         fn001.a.label_vu_uiid
-        fn001.a.ve_uiid         // value editable label
-        fn001.a.transform_type  // what are we transforming from/to; also follows constants
+        fn001.a.ve_uiid          // value editable label
+        fn001.a.transform_type   // what are we transforming from/to; also follows constants
         fn001.a.ms_max
     }
     fn001.ev := real(fn001.a.control_uiid -> value)
     select(fn001.a.transform_type)
         case __LABEL_TRANSFORM_EV_MS
             fn001.ms_divider := 1000000.0 / fn001.a.ms_max
-            fn001.r.ve_value := int(fn001.ev / fn001.ms_divider + 0.5 )
+            fn001.r.ve_value := int(fn001.a.control_curved_value / fn001.ms_divider + 0.5 )
 
         case __LABEL_TRANSFORM_EV_DB
             fn001.db := 18.0 * log2(fn001.ev/629960.524947) { considering -inf : +12dB }
             fn001.r.ve_value := int(fn001.db )
-            message(f'fn001.r.ve_value: <fn001.r.ve_value> | fn001.db: <fn001.db> | fn001.ev: <fn001.ev>')
     end select
 
     fn001.a.label_vu_uiid -> text  := label_value_units[fn001.a.label_vu]
     fn001.a.ve_uiid       -> value := fn001.r.ve_value
-    message(f'fn001.a.ve_uiid: <fn001.a.ve_uiid> | get_ui_id(valueedit_sustain) : <get_ui_id(valueedit_sustain)>')
-    message(f'fn001.a.ve_uiid value: <fn001.a.ve_uiid -> value>')
+end function
+
+function fn002_get_curved_value
+    {   arguments
+        fn002.a.control_uiid    // the slider's uiid which value will be curved
+        fn002.a.control_range   // to store the max-min
+        fn002.a.curve_type      // for curve branching 
+        fn002.a.curve_exponent
+        fn002.r.curved_value
+    }
+
+    { we will use the range min later too}
+    fn002.control_range_min := real(fn002.a.control_uiid -> min_value)
+
+    fn002.a.control_range := ...
+        real(fn002.a.control_uiid -> max_value) - fn002.control_range_min
+
+    fn002.control_value := real(fn002.a.control_uiid -> value)
+
+    select(fn002.a.curve_type)
+        case __CURVE_EXPONENTIAL
+            fn002.r.curved_value :=                                                           ...
+                pow(                                                                          ...
+                    (fn002.control_value - fn002.control_range_min) / fn002.a.control_range,  ...
+                    fn002.a.curve_exponent                                                    ...
+                ) * fn002.a.control_range + fn002.control_range_min
+
+    end select
+end function
+
+function fn003_get_inverse_curved_value_from_ve
+    {
+        fn003.a.ve_value
+        fn003.a.ve_multiplicator // the number ve value needs to be multiplicated by to go back to the slider scale
+        fn003.a.curve_type
+        fn003.r.curved_value
+    }
+
+    fn003.ve_value               := real(fn003.a.ve_uiid -> value)
+    fn003.control_value          := fn003.ve_value * fn003.a.ve_multiplicator
+    fn003.parent_range_min_value := real(ve_labels_parent_sliders_uiid [fn003.a.ve_uiid - UIID_START] -> min_value)
+    fn003.parent_range_max_value := real(ve_labels_parent_sliders_uiid [fn003.a.ve_uiid - UIID_START] -> max_value)
+
+    fn003.a.control_range := fn003.parent_range_max_value - fn003.parent_range_min_value
+
+    select(fn003.a.curve_type)
+        case __CURVE_EXPONENTIAL
+            fn003.r.ui_slider_value :=                                           ...
+                int(                                                             ...
+                    fn003.parent_range_min_value + fn003.a.control_range *       ...
+                    pow(                                                         ...
+                        (fn003.control_value - fn003.parent_range_min_value) / ...
+                            fn003.a.control_range,                               ...
+                            1.0 / fn003.a.curve_exponent                         ...
+                    )                                                            ...
+                )
+
+    end select
+
 end function

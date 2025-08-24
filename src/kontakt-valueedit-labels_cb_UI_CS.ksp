@@ -1,10 +1,74 @@
 on ui_controls
+    if in_range( NI_UI_ID, UIID_ADSR_sliders [ 0 ], UIID_ADSR_sliders [ 3 ])
+        uicbs_uiid_index     := NI_UI_ID - UIID_ADSR_sliders [ 0 ]
+        uicbs_uiid_arr_index := _uicbs_uiid_arr_index(NI_UI_ID)
 
-    { Example:
-        if in_range( NI_UI_ID, UIID_array [ 0 ], UIID_array [ max ])
-            uiid := NI_UI_ID - UIID_array [ 0 ]
-            // do something with the control that has uiid
+        if  NI_UI_ID # UIID_ADSR_sliders [ __ADSR_SUSTAIN ]
+            { curve thy value, store it }
+            fn002.a.control_uiid   := NI_UI_ID
+            fn002.a.curve_type     := slider_curve_type     [ uicbs_uiid_arr_index ]
+            fn002.a.curve_exponent := slider_curve_exponent [ uicbs_uiid_arr_index ]
+            call fn002_get_curved_value
+
+            control_curve_value [ uicbs_uiid_arr_index ] := int(fn002.r.curved_value)
+
+            { update the child ve label }
+            slider_child_ve_label_uiids [ uicbs_uiid_arr_index ] -> value := ...
+                control_curve_value [ uicbs_uiid_arr_index ] / ...
+                slider_to_ve_scaler [ uicbs_uiid_arr_index ]
+
+            { set_ve_label args }
+            fn001.a.label_vu             := __LABEL_VALUE_UNIT_MS
+            fn001.a.transform_type       := __LABEL_TRANSFORM_EV_MS
+            fn001.ms_divider             := real(slider_to_ve_scaler [ uicbs_uiid_arr_index ])
+            fn001.a.ms_max               := real(slider_to_label_ms_max [ uicbs_uiid_arr_index ])
+            fn001.a.control_curved_value := fn002.r.curved_value
+        else
+            { set_ve_label args }
+            fn001.a.label_vu       := __LABEL_VALUE_UNIT_DB
+            fn001.a.transform_type := __LABEL_TRANSFORM_EV_DB
         end if
-    }
+
+        { set_ve_label shared args }
+        fn001.a.label_vu_uiid  := ve_unit_labels_uiids [ slider_child_ve_label_uiids [ uicbs_uiid_arr_index ] - UIID_START ]
+        fn001.a.control_uiid   := NI_UI_ID
+        fn001.a.ve_uiid        := slider_child_ve_label_uiids [ uicbs_uiid_arr_index ]
+
+        call fn001_set_ve_label
+
+    end if
+
+    if in_range( NI_UI_ID, UIID_ADSR_ves [ 0 ], UIID_ADSR_ves [ 3 ])
+        uicbs_uiid_index        := NI_UI_ID - UIID_ADSR_ves [ 0 ]
+        uicbs_parent_uiid       := ve_labels_parent_sliders_uiid [ _uicbs_uiid_arr_index( NI_UI_ID  ) ]
+        uicbs_parent_uiid_index := _uicbs_parent_slider_uiid_index( NI_UI_ID )
+
+        if  NI_UI_ID # UIID_ADSR_ves [ __ADSR_SUSTAIN ]
+            { the value to be used for engine parameters is the curved one. 
+            the value below is just for the UI label }
+            fn003.a.ve_uiid          := NI_UI_ID
+            fn003.a.ve_multiplicator := real(slider_to_ve_scaler [ uicbs_parent_uiid_index ])
+            fn003.a.curve_type       := slider_curve_type     [ uicbs_parent_uiid_index ]
+            fn003.a.curve_exponent   := slider_curve_exponent [ uicbs_parent_uiid_index ]
+            call fn003_get_inverse_curved_value_from_ve
+
+            { change the ui slider with the inverted value so it looks correct on the UI }
+            uicbs_parent_uiid -> value := fn003.r.ui_slider_value
+
+            { we need the curved value from this ve value }
+            fn002.a.control_uiid   := uicbs_parent_uiid
+            fn002.a.curve_type     := slider_curve_type     [ uicbs_parent_uiid_index ]
+            fn002.a.curve_exponent := slider_curve_exponent [ uicbs_parent_uiid_index ]
+            call fn002_get_curved_value
+
+            control_curve_value [ uicbs_parent_uiid_index ] := int(fn002.r.curved_value)
+
+        else
+            adsr_sustain_dB := real(valueedit_sustain)
+            adsr_sustain_ev := 629960.524947 * pow( 2.0, adsr_sustain_dB / 18.0)
+            slider_sustain := int(adsr_sustain_ev)
+        end if
+
+    end if
 
 end on
