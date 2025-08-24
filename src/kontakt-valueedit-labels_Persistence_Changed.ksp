@@ -1,0 +1,4 @@
+on persistence_changed
+    import "kontakt-valueedit-labels_UIIDs_data.ksp"
+
+end on

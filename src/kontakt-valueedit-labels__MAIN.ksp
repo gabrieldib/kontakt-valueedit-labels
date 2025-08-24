@@ -19,6 +19,8 @@ on init
 end on // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 import "kontakt-valueedit-labels__FUNCTIONS.ksp"
-
 import "kontakt-valueedit-labels_cb_UI_CS.ksp"
+import "kontakt-valueedit-labels_Persistence_Changed.ksp"
+
+
 

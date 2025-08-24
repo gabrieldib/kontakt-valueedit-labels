@@ -63,7 +63,7 @@
   declare read ui_slider                $slider_release                           ( 0, 1000000 ) 
   declare read ui_value_edit            $valueedit_attack                         ( 0, 15000, 1 ) 
   declare read ui_value_edit            $valueedit_decay                          ( 0, 25000, 1 ) 
-  declare read ui_value_edit            $valueedit_sustain                        ( -346, 12, 1 ) 
+  declare read ui_value_edit            $valueedit_sustain                        ( -120, 12, 1 ) 
   declare read ui_value_edit            $valueedit_release                        ( 0, 25000, 1 ) 
 
   { capturing all ui_controls uiids }

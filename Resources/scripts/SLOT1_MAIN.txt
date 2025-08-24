@@ -1,4 +1,4 @@
-{ Compiled on Sun Aug 24 01:54:42 2025 }
+{ Compiled on Sun Aug 24 02:02:15 2025 }
 on init
   declare $sksp_dummy
   declare $concat_it
@@ -92,7 +92,7 @@ on init
   declare ui_value_edit $valueedit_decay(0,25000,1)
   make_persistent($valueedit_decay)
   read_persistent_var($valueedit_decay)
-  declare ui_value_edit $valueedit_sustain(-346,12,1)
+  declare ui_value_edit $valueedit_sustain(-120,12,1)
   make_persistent($valueedit_sustain)
   read_persistent_var($valueedit_sustain)
   declare ui_value_edit $valueedit_release(0,25000,1)
@@ -397,5 +397,18 @@ on ui_controls
       $slider_sustain := int(~adsr_sustain_ev)
     end if
   end if
+end on
+
+on persistence_changed
+  %UIID_ADSR_sliders[0] := get_ui_id($slider_attack)
+  %UIID_ADSR_ves[0] := get_ui_id($valueedit_attack)
+  $i__i := 0
+  while ($i__i<=1000)
+    if ($i__i<4)
+      %UIID_ADSR_sliders[$i__i] := %UIID_ADSR_sliders[0]+$i__i
+      %UIID_ADSR_ves[$i__i] := %UIID_ADSR_ves[0]+$i__i
+    end if
+    inc($i__i)
+  end while
 end on
 
